@@ -1,3 +1,5 @@
+import { InvalidAmountError, InvalidTransactionError } from "../errors/DomainError.js";
+
 export class Transaction{
     constructor(
         public readonly id: string,
@@ -11,11 +13,11 @@ export class Transaction{
 
     private validate(): void{
         if(this.value <= 0){
-            throw new Error('Transaction value must be greater than zero.');
+            throw new InvalidAmountError()
         }
 
         if(this.payerId === this.payeeId){
-            throw new Error('Payer and Payee cannot be the same user.')
+            throw new InvalidTransactionError('Payer and Payee cannot be the same user.')
         }
     }
 

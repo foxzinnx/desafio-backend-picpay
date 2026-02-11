@@ -1,3 +1,4 @@
+import { InsufficientFundsError, InvalidAmountError, MerchantCannotSendMoneyError } from "../errors/DomainError.js";
 import type { UserType } from "./User.js";
 
 export class Wallet{
@@ -14,15 +15,15 @@ export class Wallet{
 
     public debit(amount: number): void{
         if(this.ownerType === 'MERCHANT'){
-            throw new Error('Merchants cannot send money.');
+            throw new MerchantCannotSendMoneyError()
         }
 
         if(amount <= 0){
-            throw new Error('Amount must be positive.');
+            throw new InvalidAmountError()
         }
 
         if(this._balance < amount){
-            throw new Error('Insufficient funds.');
+            throw new InsufficientFundsError()
         }
 
         this._balance -= amount;
@@ -30,7 +31,7 @@ export class Wallet{
 
     public credit(amount: number): void{
         if(amount <= 0){
-            throw new Error('Amount must be positive');
+            throw new InvalidAmountError()
         }
         this._balance += amount;
     }

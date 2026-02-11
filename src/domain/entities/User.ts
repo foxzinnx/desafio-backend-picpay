@@ -1,3 +1,4 @@
+import { InvalidMerchantsDocumentError } from "../errors/DomainError.js";
 import type { Document } from "../value-objects/Document.js";
 
 export type UserType = 'COMMON' | 'MERCHANT';
@@ -12,7 +13,7 @@ export class User{
         public readonly type: UserType
     ){
         if(this.type === 'MERCHANT' && this.document.type === 'CPF'){
-            throw new Error('Logistas devem ter CNPJ');
+            throw new InvalidMerchantsDocumentError()
         }
     }
 

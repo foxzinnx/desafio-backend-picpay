@@ -1,6 +1,6 @@
 import type { INotificationGateway } from "@/application/repositories/INotificationGateway.js";
 
-export class FetchAuthorizerGateway implements INotificationGateway {
+export class FetchNotificationGateway implements INotificationGateway {
     async send(userId: string, message: string): Promise<void> {
         const response = await fetch('https://util.devi.tools/api/v1/notify', {
             method: "POST",

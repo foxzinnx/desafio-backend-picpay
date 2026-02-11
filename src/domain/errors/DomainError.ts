@@ -22,3 +22,27 @@ export class WalletNotFound extends DomainError{
         super(`Wallet not found: ${walletId}`);
     }
 }
+
+export class InvalidAmountError extends DomainError {
+    constructor(){
+        super('Amount must be positive.');
+    }
+}
+
+export class MerchantCannotSendMoneyError extends DomainError {
+    constructor(){
+        super('Merchants cannot send money.');
+    }
+}
+
+export class InvalidTransactionError extends DomainError {
+    constructor(reason: string){
+        super(`Invalid transaction: ${reason}`);
+    }
+}
+
+export class InvalidMerchantsDocumentError extends DomainError {
+    constructor(){
+        super('Merchants must be have a CNPJ.')
+    }
+}

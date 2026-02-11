@@ -19,11 +19,13 @@ export class PrismaWalletRepository implements IWalletRepository {
 
         if(!prismaWallet) return null;
 
+        const ownerType = prismaWallet.user.type.toUpperCase() as UserType;
+
         return new Wallet(
             prismaWallet.id,
             prismaWallet.userId,
             Number(prismaWallet.balance),
-            prismaWallet.user.type as UserType
+            ownerType
         )
     }
 
